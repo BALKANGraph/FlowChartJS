@@ -1,7 +1,7 @@
 # ![Flow Chart JS](https://balkan.app/content/img/icon-flowchart-js.png) Flow Chart JS
 Flow Chart JS is a simple, flexible and highly customizable organization chart plugin for presenting the structure of your organization and the relationships in an elegant way.
 
-![Org Chart JS](https://cdn.balkan.app/OrgChartJS/OrgChartJS.jpg?v=1)
+![Flow Chart JS](https://cdn.balkan.app/OrgChartJS/OrgChartJS.jpg?v=1)
 
 ## [Demos](https://balkan.app/FlowChartJS/Demos)  &nbsp;&nbsp;&nbsp;&nbsp;  [Docs](https://balkan.app/FlowChartJS/Docs)  &nbsp;&nbsp;&nbsp;&nbsp;  [Download](https://balkan.app/FlowChartJS/Download) &nbsp;&nbsp;&nbsp;&nbsp;  [Support](https://balkan.app/FlowChartJS/Support)
 
@@ -9,7 +9,7 @@ Flow Chart JS is a simple, flexible and highly customizable organization chart p
 - Supports both local data and remote data (JSON)
 
 ## Installation
-Option 1 - [standalone build](https://balkan.app/OrgChartJS/Docs/GettingStarted)
+Option 1 - [standalone build](https://balkan.app/FlowChartJS/Docs/GettingStarted)
 
 Option 2 - NPM
 ```
@@ -28,6 +28,6 @@ npm i @balkangraph/flowchart.js
 
 ## 1 click to talk 2 us
 
-[![OrgChart](https://balkan.app/content/img/phone-icon4.png)](https://webcall.me/BALKANGraph)
+[![FlowChart](https://balkan.app/content/img/phone-icon4.png)](https://webcall.me/BALKANGraph)
 
 
