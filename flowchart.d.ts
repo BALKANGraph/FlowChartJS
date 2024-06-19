@@ -3,6 +3,8 @@
         constructor(chart: FlowChart);
         exit(): void;
         editNextField(): void;
+        removeField(shapeId: string | number, field: string): void;
+        addField(shapeId: string | number, field: string): void;
         edit(nodeId: string | number, fieldName: string): void;
     }
 }
@@ -63,11 +65,9 @@ declare class FlowChart {
     uiShapeContextMenu: FlowChart.UIMenu;
     editor: FlowChart.Editor;
     readonly nodes: FlowChart.ShapeCollection;   
-    readonly labels: FlowChart.ShapeCollection;  
+    readonly labels: FlowChart.ShapeCollection;   
     readonly links: FlowChart.LinkCollection;        
     readonly ports: FlowChart.PortCollection;   
-    readonly selectedNodes: FlowChart.SelectedShapeCollection;     
-    readonly selectedLabels: FlowChart.SelectedShapeCollection;   
     selectedPortShape: FlowChart.Shape;     
     selectedPort: FlowChart.Port;      
     scale: number;      
@@ -84,6 +84,7 @@ declare class FlowChart {
     static DEFAULT_LABEL_SHAPE_ID: string;
     static CHANGED_TIMEOUT: number;
     static PADDING: number;
+    static shortcuts: { [key: string]: FlowChart.shortcut }
     static isNEU(val: any): boolean;
     static isMobile(): boolean;
     static animate (elements: Array<HTMLElement | SVGElement>, attrStart: Object, attrEnd: Object, duration: number, func: FlowChart.anim, callback?: Function, tick?: boolean): void;
@@ -107,6 +108,11 @@ declare class FlowChart {
     clearRedo(): void;
     clearUndo(): void;
     alignShapes(shapes: Array<FlowChart.Shape>, alignPosition: FlowChart.position, alignToTheFirstNode?: boolean): void;
+
+    onSelectedShapeChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
+    onInit(listener: (this: FlowChart, args: {}) => void): FlowChart;
+    onChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
+    onUndoRedoChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
 }
 
 
@@ -126,21 +132,25 @@ declare module FlowChart {
         toNodeId: string | number;  
         from: string;      
         to: string;      
-        readonly length : number;
+        element: HTMLElement;    
     }
 }declare module FlowChart {
-    class LinkCollection implements Iterable<FlowChart.Link>{
+    class LinkCollection implements Iterable<FlowChart.Shape>{
         constructor(chart: FlowChart);    
+        [Symbol.iterator](): Iterator<FlowChart.Shape>;
+
 
         readonly length: number;
 
-        [Symbol.iterator](): Iterator<FlowChart.Link>;
-        
-        add(linkOrLinks: FlowChart.Link | Array<FlowChart.Link>): void;
-        get(from: string | number, to: string | number): FlowChart.Link;
+        addRange(links: Array<FlowChart.Link>): Array<FlowChart.Link>;
+        add(link: FlowChart.Link): FlowChart.Link;        
+        get(from: string , to: string ): FlowChart.Link;
         getByShape(shape: FlowChart.Shape): FlowChart.Link;
-        getElement(link: FlowChart.Link): SVGElement;
-        remove(shapeIdOrLinkOrLinks: string | number | FlowChart.Link | Array<FlowChart.Link>): void;
+        clear(): void;
+        removeRange(links: Array<FlowChart.Link>): void;
+        remove(link: FlowChart.Link): void;
+        last(): FlowChart.Link;
+        first(): FlowChart.Link;
     }
 }declare module FlowChart {
     class Options {
@@ -184,19 +194,29 @@ declare module FlowChart {
     }
 }declare module FlowChart {
     class SelectedShapeCollection implements Iterable<FlowChart.Shape>{
-        constructor(chart: FlowChart);    
+
+        constructor(chart: FlowChart);  
 
         [Symbol.iterator](): Iterator<FlowChart.Shape>;
 
+
+
         readonly length: number;
         
-        add(shapeOrShapes: FlowChart.Shape | Array<FlowChart.Shape>): void;
-        remove(shapeOrShapes: FlowChart.Shape | Array<FlowChart.Shape>): void;
+        add(shape: FlowChart.Shape): FlowChart.Shape;        
+        addRange(shapes: Array<FlowChart.Shape>): Array<FlowChart.Shape>; 
+        remove(shape: FlowChart.Shape): void;
         clear(): void;
         last(): FlowChart.Shape;
         first(): FlowChart.Shape;
-        contains(shape: FlowChart.Shape): boolean;
-        html(shape : FlowChart.Shape, scale : number) : string;
+        nodes(): Array<FlowChart.Node>;
+        labels(): Array<FlowChart.Label>;
+        contains(shapeId: string | number): boolean;
+        get(shapeId: string | number): FlowChart.Shape;
+        selectNodeRight(deselectAll: boolean): void;
+        selectNodeLeft(deselectAll: boolean): void;
+        selectNodeAbove(deselectAll: boolean): void;
+        selectNodeBelow(deselectAll: boolean): void;
     }
 }
 declare module FlowChart {
@@ -211,26 +231,77 @@ declare module FlowChart {
         y: number;        
         width: number;        
         height: number;        
+        type: string;        
+        selected: boolean;        
+        element: HTMLElement;
+    }
+
+    class Label extends Shape{
+        from: string;
+        to: string;
+        position: number;
+    }
+    
+    class Node extends Shape{
     }
 }declare module FlowChart {
     class ShapeCollection implements Iterable<FlowChart.Shape>{
-        constructor(chart: FlowChart);    
+
+        constructor(chart: FlowChart);  
 
         [Symbol.iterator](): Iterator<FlowChart.Shape>;
 
+
+        /**
+         * Gets the number of shapes in the collection.
+         */
         readonly length: number;
-        
-        add(shapeOrShapes: FlowChart.Shape | Array<FlowChart.Shape>): void;
-        addField(shapeId: string | number, field: string): void;
-        removeField(shapeId: string | number, field: string): void;
-        get(shapeId: string | number): FlowChart.Shape;
-        getElement(shapeId: string | number): SVGElement;
-        remove(shapeOrShapes: FlowChart.Shape | Array<FlowChart.Shape>): void;
-        has(shapeId: string | number): boolean;
+        /**
+         * Adds the Shapes of the specified collection to the end of the collection.
+         * @param shapes The collection whose elements should be added to the end of the ShapeCollection. The collection itself cannot be null, but it can contain elements that are null.
+         */
+        addRange(shapes: Array<FlowChart.Shape>): Array<FlowChart.Shape>;         
+        /**
+         * Adds an Shape to the end of the collection.
+         * @param shape The shape to be added to the end of the collection. The value cannot be null.
+         */
+        add(shape: FlowChart.Shape): FlowChart.Shape;    
+        /**
+         * Gets Shape by its id.
+         * @param shapeId Shape identification number
+         */    
+        get(shapeId: string | number): FlowChart.Shape; 
+        /**
+         * Removes all Shapes from the collection.
+         */               
+        clear(): void;        
+        /**
+         * Removes Shape from the collection.
+         * @param shape The Shape to remove from the collection. The value cannot be null.
+         */
+        remove(shape: FlowChart.Shape): void;
+        /**
+         * Removes a range of Shapes from the collection.
+         * @param shapes Shapes to be removed from the collection. 
+         */
+        removeRange(shapes: Array<FlowChart.Shape>): void;
+        /**
+         * Determines whether an Shape ith shapeId is in the collection.
+         * @param shapeId The Shape id to locate in the collection. The value cannot be null.
+         */
+        contains(shapeId: string | number): boolean;
+        /**
+         * Gets the last Shape from the collection
+         */
+        last(): FlowChart.Shape;
+        /**
+         * Gets the first Shape from the collection
+         */
+        first(): FlowChart.Shape;     
     }
 }
 declare module FlowChart {
-    class Shortcut{
+    class shortcut{
         keysPressed: Array<string>;       
         mouseActions: Array<string>;       
         activeComponentType: string;
