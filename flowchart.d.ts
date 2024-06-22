@@ -43,14 +43,13 @@ declare module FlowChart {
     
     enum startPosition {
         none,
-        meetHeight,
-        meetWidth,
-        meetBoundary,
+        fitHeight,
+        fitWidth,
+        fit,
         centerTop,
         centerBottom,
         centerLeft,
-        centerRight,
-        center
+        centerRight
     }
 }
 
@@ -67,7 +66,9 @@ declare class FlowChart {
     readonly nodes: FlowChart.ShapeCollection;   
     readonly labels: FlowChart.ShapeCollection;   
     readonly links: FlowChart.LinkCollection;        
-    readonly ports: FlowChart.PortCollection;   
+    readonly ports: FlowChart.PortCollection;  
+    selectedShapes: FlowChart.SelectedShapeCollection; 
+    viewBox: Array<number>; 
     selectedPortShape: FlowChart.Shape;     
     selectedPort: FlowChart.Port;      
     scale: number;      
@@ -97,8 +98,8 @@ declare class FlowChart {
         links: Array<FlowChart.Link>,
     }): void;
 
-    json(): JSON;
-    text(): string;
+    json(options?: Array<string>): JSON;
+    text(options?: Array<string>): string;
     getShape(id: string | number): FlowChart.Shape;
     generateId(): string;
     undo(): void;
@@ -108,11 +109,11 @@ declare class FlowChart {
     clearRedo(): void;
     clearUndo(): void;
     alignShapes(shapes: Array<FlowChart.Shape>, alignPosition: FlowChart.position, alignToTheFirstNode?: boolean): void;
-
-    onSelectedShapeChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
+    reposition(position?: FlowChart.startPosition) : void;
     onInit(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onUndoRedoChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
+    onSelectedShapesChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;    
 }
 
 
@@ -157,6 +158,7 @@ declare module FlowChart {
         mode: string;
         startPosition: FlowChart.startPosition;
         startScale: number;
+        loadFromSession: boolean;
         readOnly: boolean;
         shapeBar: boolean;
         menuBar: boolean;
