@@ -114,6 +114,7 @@ declare class FlowChart {
     onChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onUndoRedoChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onSelectedShapesChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;    
+    onSelectedPortChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;    
 }
 
 
@@ -252,8 +253,6 @@ declare module FlowChart {
         constructor(chart: FlowChart);  
 
         [Symbol.iterator](): Iterator<FlowChart.Shape>;
-
-
         /**
          * Gets the number of shapes in the collection.
          */
