@@ -1,5 +1,5 @@
 ﻿declare module FlowChart {
-    class Editor {
+    interface Editor {
         constructor(chart: FlowChart);
         exit(): void;
         editNextField(): void;
@@ -120,12 +120,12 @@ declare class FlowChart {
 
 declare module FlowChart {
     
-    class Point{
+    interface Point{
         x: number;
         y: number;
     }
 
-    class Link{
+    interface Link{
         templateId: string
         points: Array<Point>;
         fromPortId: string | number;
@@ -155,7 +155,7 @@ declare module FlowChart {
         first(): FlowChart.Link;
     }
 }declare module FlowChart {
-    class Options {
+    interface Options {
         mode?: string;
         startPosition?: FlowChart.startPosition;
         startScale?: number;
@@ -175,17 +175,16 @@ declare module FlowChart {
     }
 }
 declare module FlowChart {
-    class Port{
+    interface Port{
         shape: FlowChart.Shape;
         x: number;
         y: number;
         position : FlowChart.position;
     }
 }declare module FlowChart {
-    class PortCollection implements Iterable<FlowChart.Port>{
+    interface PortCollection {
         constructor(chart: FlowChart);    
 
-        [Symbol.iterator](): Iterator<FlowChart.Port>;
 
         readonly length: number;
        
@@ -196,11 +195,10 @@ declare module FlowChart {
         get(shapeId: string | number, portId: string): FlowChart.Port;
     }
 }declare module FlowChart {
-    class SelectedShapeCollection implements Iterable<FlowChart.Shape>{
+    interface SelectedShapeCollection{
 
         constructor(chart: FlowChart);  
 
-        [Symbol.iterator](): Iterator<FlowChart.Shape>;
 
 
 
@@ -223,7 +221,7 @@ declare module FlowChart {
     }
 }
 declare module FlowChart {
-    class Shape{
+    interface Shape{
         id: string | number;
         templateId: string;
         readonly left: number;
@@ -248,11 +246,10 @@ declare module FlowChart {
     class Node extends Shape{
     }
 }declare module FlowChart {
-    class ShapeCollection implements Iterable<FlowChart.Shape>{
+    interface ShapeCollection{
 
         constructor(chart: FlowChart);  
 
-        [Symbol.iterator](): Iterator<FlowChart.Shape>;
         /**
          * Gets the number of shapes in the collection.
          */
@@ -302,32 +299,32 @@ declare module FlowChart {
     }
 }
 declare module FlowChart {
-    class shortcut{
+    interface shortcut{
         keysPressed: Array<string>;       
         mouseActions: Array<string>;       
         activeComponentType: string;
     }
 }declare module FlowChart {
-    class UIMenu {
+    interface UIMenu {
         constructor(chart: FlowChart);
         init(): void;
         hide(): void;
         show(x: number, y: number, nodeId: string | number, menu: any): void;
     }
 }declare module FlowChart {
-    class UIMenuBar {
+    interface UIMenuBar {
         constructor(chart: FlowChart)
         init(): void;
         html(): string;
     }
 }declare module FlowChart {
-    class UIStatusBar {
+    interface UIStatusBar {
         constructor(chart: FlowChart);
         init(): void;
         html(): string;
     }
 }declare module FlowChart {
-    class UIShapeBar {
+    interface UIShapeBar {
         constructor(chart: FlowChart);
         init(): void;
         html(): string;
