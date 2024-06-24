@@ -156,19 +156,19 @@ declare module FlowChart {
     }
 }declare module FlowChart {
     class Options {
-        mode: string;
-        startPosition: FlowChart.startPosition;
-        startScale: number;
-        loadFromSession: boolean;
-        readOnly: boolean;
-        shapeBar: boolean;
-        menuBar: boolean;
-        statusBar: boolean;
-        colors: Array<string>;
-        scaleMax: number;
-        scaleMin: number;
-        nodeSeparation: number;
-        zoom: {
+        mode?: string;
+        startPosition?: FlowChart.startPosition;
+        startScale?: number;
+        loadFromSession?: boolean;
+        readOnly?: boolean;
+        shapeBar?: boolean;
+        menuBar?: boolean;
+        statusBar?: boolean;
+        colors?: Array<string>;
+        scaleMax?: number;
+        scaleMin?: number;
+        nodeSeparation?: number;
+        zoom?: {
             speed: number;
             smooth: number
         }
