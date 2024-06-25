@@ -61,7 +61,7 @@ declare class FlowChart {
     uiShapeBar: FlowChart.UIShapeBar;
     uiMenuBar: FlowChart.UIMenuBar;
     uiStatusBar: FlowChart.UIStatusBar;
-    uiShapeContextMenu: FlowChart.UIMenu;
+    shapeContextMenu: FlowChart.UIMenu;
     editor: FlowChart.Editor;
     readonly nodes: FlowChart.ShapeCollection;   
     readonly labels: FlowChart.ShapeCollection;   
@@ -127,14 +127,14 @@ declare module FlowChart {
 
     interface Link{
         templateId: string
-        points: Array<Point>;
-        fromPortId: string | number;
-        fromNodeId: string | number;
-        toPortId: string | number;
-        toNodeId: string | number;  
+        points?: Array<Point>;
+        readonly fromPortId?: string | number;
+        readonly fromNodeId?: string | number;
+        readonly toPortId?: string | number;
+        readonly toNodeId?: string | number;  
         from: string;      
         to: string;      
-        element: HTMLElement;    
+        element?: HTMLElement;    
     }
 }declare module FlowChart {
     class LinkCollection implements Iterable<FlowChart.Shape>{
@@ -223,18 +223,19 @@ declare module FlowChart {
 declare module FlowChart {
     interface Shape{
         id: string | number;
-        templateId: string;
-        readonly left: number;
-        readonly right: number;
-        readonly top: number;
-        readonly bottom: number;
+        templateId?: string;
+        readonly left?: number;
+        readonly right?: number;
+        readonly top?: number;
+        readonly bottom?: number;
         x: number;
         y: number;        
-        width: number;        
-        height: number;        
-        type: string;        
-        selected: boolean;        
-        element: HTMLElement;
+        width?: number;        
+        height?: number;        
+        type?: string;        
+        selected?: boolean;        
+        element?: HTMLElement;
+        [name: string]: any;
     }
 
     class Label extends Shape{
