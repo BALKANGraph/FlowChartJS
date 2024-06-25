@@ -89,6 +89,7 @@ declare class FlowChart {
     static isNEU(val: any): boolean;
     static isMobile(): boolean;
     static animate (elements: Array<HTMLElement | SVGElement>, attrStart: Object, attrEnd: Object, duration: number, func: FlowChart.anim, callback?: Function, tick?: boolean): void;
+   
 
     constructor(element: HTMLElement | string, options?: FlowChart.Options);
 
@@ -238,13 +239,13 @@ declare module FlowChart {
         [name: string]: any;
     }
 
-    class Label extends Shape{
+    interface Label extends Shape{
         from: string;
         to: string;
         position: number;
     }
     
-    class Node extends Shape{
+    interface Node extends Shape{
     }
 }declare module FlowChart {
     interface ShapeCollection{
@@ -304,6 +305,45 @@ declare module FlowChart {
         keysPressed: Array<string>;       
         mouseActions: Array<string>;       
         activeComponentType: string;
+    }
+}declare module FlowChart {
+    interface ShapeTemplate{
+        displayName: string;
+        svg(link: FlowChart.Shape) : string;
+        html(link: FlowChart.Shape) : string;
+        ports?: [name: string, FlowChart.Point];
+        width?: number;
+        height?: number;
+        minWidth?: number;
+        minHeight?: number;
+        fill?: string;
+        stroke?: string;            
+        strokeWidth?: number;            
+        widthFitContent?: boolean;
+        heightFitContent?: boolean;
+        displayInShapeBar?: boolean;
+        displayInPortShapeBar?: boolean;
+        resizable?: boolean;
+    }
+
+    interface LinkTemplate{
+        svg(link: FlowChart.Link) : string;
+        stroke?: string;
+        strokeWidth?: number;
+    }
+
+    interface linkTemplates {
+        base: FlowChart.LinkTemplate;
+        [name: string]: FlowChart.LinkTemplate;
+    }
+
+    interface shapeTemplates {
+        base: FlowChart.ShapeTemplate;
+        startend: FlowChart.ShapeTemplate;
+        rectangle: FlowChart.ShapeTemplate;
+        diamond: FlowChart.ShapeTemplate;
+        label: FlowChart.ShapeTemplate;
+        [name: string]: FlowChart.ShapeTemplate;
     }
 }declare module FlowChart {
     interface UIMenu {
