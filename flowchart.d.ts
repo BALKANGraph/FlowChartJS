@@ -127,7 +127,7 @@ declare module FlowChart {
     }
 
     interface Link{
-        templateId: string
+        templateId?: string
         points?: Array<Point>;
         readonly fromPortId?: string | number;
         readonly fromNodeId?: string | number;
@@ -223,14 +223,11 @@ declare module FlowChart {
 }
 declare module FlowChart {
     interface Shape{
-        id: string | number;
         templateId?: string;
         readonly left?: number;
         readonly right?: number;
         readonly top?: number;
-        readonly bottom?: number;
-        x: number;
-        y: number;        
+        readonly bottom?: number;      
         width?: number;        
         height?: number;        
         type?: string;        
@@ -245,7 +242,10 @@ declare module FlowChart {
         position: number;
     }
     
-    interface Node extends Shape{
+    interface Node extends Shape{        
+        id: string | number;
+        x: number;
+        y: number;  
     }
 }declare module FlowChart {
     interface ShapeCollection{
