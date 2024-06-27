@@ -128,6 +128,10 @@ declare class FlowChart {
     onUndoRedoChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onSelectedShapesChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;    
     onSelectedPortChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;    
+    onShortcut(listener: (this: FlowChart, args: {
+        name: string,
+        event: Event
+    }) => void): FlowChart;    
 }
 
 
