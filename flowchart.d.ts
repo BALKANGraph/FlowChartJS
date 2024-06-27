@@ -49,7 +49,8 @@ declare module FlowChart {
         centerTop,
         centerBottom,
         centerLeft,
-        centerRight
+        centerRight,
+        center
     }
 }
 
@@ -160,6 +161,8 @@ declare module FlowChart {
 
 
         readonly length: number;
+        readonly last: FlowChart.Link;
+        readonly first: FlowChart.Link;
 
         addRange(links: Array<FlowChart.Link>): Array<FlowChart.Link>;
         add(link: FlowChart.Link): FlowChart.Link;        
@@ -168,8 +171,7 @@ declare module FlowChart {
         clear(): void;
         removeRange(links: Array<FlowChart.Link>): void;
         remove(link: FlowChart.Link): void;
-        last(): FlowChart.Link;
-        first(): FlowChart.Link;
+
     }
 }declare module FlowChart {
     interface Options {
@@ -218,17 +220,18 @@ declare module FlowChart {
 
 
 
-
+        readonly last: FlowChart.Shape;
+        readonly first: FlowChart.Shape;
+        readonly nodes: Array<FlowChart.Node>;
+        readonly labels: Array<FlowChart.Label>;
         readonly length: number;
         
         add(shape: FlowChart.Shape): FlowChart.Shape;        
         addRange(shapes: Array<FlowChart.Shape>): Array<FlowChart.Shape>; 
         remove(shape: FlowChart.Shape): void;
         clear(): void;
-        last(): FlowChart.Shape;
-        first(): FlowChart.Shape;
-        nodes(): Array<FlowChart.Node>;
-        labels(): Array<FlowChart.Label>;
+
+ 
         contains(shapeId: string | number): boolean;
         get(shapeId: string | number): FlowChart.Shape;
         selectNodeRight(deselectAll: boolean): void;
@@ -268,6 +271,16 @@ declare module FlowChart {
 
         constructor(chart: FlowChart);  
 
+                /**
+         * Gets the last Shape from the collection
+         */
+        readonly last: FlowChart.Shape;
+
+        /**
+         * Gets the first Shape from the collection
+         */
+        readonly first: FlowChart.Shape;     
+
         /**
          * Gets the number of shapes in the collection.
          */
@@ -306,14 +319,8 @@ declare module FlowChart {
          * @param shapeId The Shape id to locate in the collection. The value cannot be null.
          */
         contains(shapeId: string | number): boolean;
-        /**
-         * Gets the last Shape from the collection
-         */
-        last(): FlowChart.Shape;
-        /**
-         * Gets the first Shape from the collection
-         */
-        first(): FlowChart.Shape;     
+
+
     }
 }
 declare module FlowChart {
