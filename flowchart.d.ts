@@ -89,7 +89,19 @@ declare class FlowChart {
     static isNEU(val: any): boolean;
     static isMobile(): boolean;
     static animate (elements: Array<HTMLElement | SVGElement>, attrStart: Object, attrEnd: Object, duration: number, func: FlowChart.anim, callback?: Function, tick?: boolean): void;
-   
+    static linkTemplates: {
+        base: FlowChart.LinkTemplate;
+        [name: string]: FlowChart.LinkTemplate;
+    }
+
+    static shapeTemplates: {
+        base: FlowChart.ShapeTemplate;
+        startend: FlowChart.ShapeTemplate;
+        rectangle: FlowChart.ShapeTemplate;
+        diamond: FlowChart.ShapeTemplate;
+        label: FlowChart.ShapeTemplate;
+        [name: string]: FlowChart.ShapeTemplate;
+    }
 
     constructor(element: HTMLElement | string, options?: FlowChart.Options);
 
@@ -332,19 +344,7 @@ declare module FlowChart {
         strokeWidth?: number;
     }
 
-    interface linkTemplates {
-        base: FlowChart.LinkTemplate;
-        [name: string]: FlowChart.LinkTemplate;
-    }
 
-    interface shapeTemplates {
-        base: FlowChart.ShapeTemplate;
-        startend: FlowChart.ShapeTemplate;
-        rectangle: FlowChart.ShapeTemplate;
-        diamond: FlowChart.ShapeTemplate;
-        label: FlowChart.ShapeTemplate;
-        [name: string]: FlowChart.ShapeTemplate;
-    }
 }declare module FlowChart {
     interface UIMenu {
         constructor(chart: FlowChart);
