@@ -176,8 +176,8 @@ declare module FlowChart {
         mode?: string;
         startPosition?: FlowChart.startPosition;
         startScale?: number;
+        interactive?: boolean;
         loadFromSession?: boolean;
-        readOnly?: boolean;
         shapeBar?: boolean;
         menuBar?: boolean;
         statusBar?: boolean;
