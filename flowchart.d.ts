@@ -242,7 +242,7 @@ declare module FlowChart {
 }
 declare module FlowChart {
     interface Shape{
-        templateId?: string;
+        templateId?: 'action' | 'document' | string;
         readonly left?: number;
         readonly right?: number;
         readonly top?: number;
