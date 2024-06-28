@@ -68,6 +68,9 @@ declare class FlowChart {
     readonly labels: FlowChart.ShapeCollection;   
     readonly links: FlowChart.LinkCollection;        
     readonly ports: FlowChart.PortCollection;  
+
+
+
     selectedShapes: FlowChart.SelectedShapeCollection; 
     viewBox: Array<number>; 
     selectedPortShape: FlowChart.Shape;     
@@ -114,6 +117,9 @@ declare class FlowChart {
 
     json(options?: Array<string>): JSON;
     text(options?: Array<string>): string;
+    svg(): string;
+    exportSVG(): void;
+
     getShape(id: string | number): FlowChart.Shape;
     generateId(): string;
     undo(): void;
@@ -269,7 +275,14 @@ declare module FlowChart {
 }declare module FlowChart {
     interface ShapeCollection{
 
+
+
         constructor(chart: FlowChart);  
+
+        readonly top: number;  
+        readonly bottom: number;  
+        readonly left: number;  
+        readonly right: number;  
 
                 /**
          * Gets the last Shape from the collection
