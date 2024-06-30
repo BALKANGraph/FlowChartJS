@@ -75,7 +75,7 @@ declare class FlowChart {
     viewBox: Array<number>; 
     selectedPortShape: FlowChart.Shape;     
     selectedPort: FlowChart.Port;      
-    scale: number;      
+    scale: number;          
     readonly VERSION: string;
     static MAGNET_MOVE_PIXELS: number;
     static MAGNET_RESIZE_PIXELS: number;
@@ -140,6 +140,10 @@ declare class FlowChart {
         name: string,
         event: Event
     }) => void): FlowChart;    
+    onMenuItemClick(listener: (this: FlowChart, args: {
+        name: string,
+        event: Event
+    }) => void): FlowChart; 
 }
 
 
@@ -387,9 +391,15 @@ declare module FlowChart {
     }
 }declare module FlowChart {
     interface UIMenuBar {
+        displayColorPalette: boolean;
         constructor(chart: FlowChart)
         init(): void;
-        html(): string;
+        addItem(options: {
+            name: string,
+            icon: string,
+            title: string
+        }): FlowChart.UIMenuBar;
+        removeItem(name: string): FlowChart.UIMenuBar;
     }
 }declare module FlowChart {
     interface UIStatusBar {
