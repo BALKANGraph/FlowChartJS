@@ -166,9 +166,8 @@ declare module FlowChart {
         element?: HTMLElement;    
     }
 }declare module FlowChart {
-    class LinkCollection implements Iterable<FlowChart.Shape>{
+    interface LinkCollection {
         constructor(chart: FlowChart);    
-        [Symbol.iterator](): Iterator<FlowChart.Shape>;
 
 
         readonly length: number;
