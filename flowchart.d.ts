@@ -89,6 +89,7 @@ declare class FlowChart {
     static DEFAULT_LABEL_SHAPE_ID: string;
     static CHANGED_TIMEOUT: number;
     static PADDING: number;
+    static SEPARATOR: string;
     static shortcuts: { [key: string]: FlowChart.shortcut }
     static isNEU(val: any): boolean;
     static isMobile(): boolean;
@@ -152,10 +153,8 @@ declare module FlowChart {
     interface Link{
         templateId?: string
         points?: Array<Point>;
-        readonly fromPortId?: string | number;
-        readonly fromNodeId?: string | number;
-        readonly toPortId?: string | number;
-        readonly toNodeId?: string | number;  
+        readonly fromShapeId?: string | number;
+        readonly toShapeId?: string | number;  
         from: string;      
         to: string;      
         element?: HTMLElement;    
@@ -212,8 +211,12 @@ declare module FlowChart {
 
 
         readonly length: number;
-       
-        getById(id: string): FlowChart.Port;
+        getByLink(link: FlowChart.link) : {
+            fromShape: FlowChart.Shape,
+            toShape: FlowChart.Shape,
+            fromPort: FlowChart.Port,
+            toPort: FlowChart.Port
+        };
         getElement(nodeId: string | number): HTMLElement;
         getByPosition(node: FlowChart.Shape, position: FlowChart.position): Array<FlowChart.Port>;
         getByOpositeOfPosition(nodeId: string | number, position: FlowChart.position): Array<FlowChart.Port>;
