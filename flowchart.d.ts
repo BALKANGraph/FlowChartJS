@@ -151,12 +151,13 @@ declare module FlowChart {
     }
 
     interface Link{
+        readonly id?: string | number;
         templateId?: string
-        points?: Array<Point>;
-        readonly fromShapeId?: string | number;
-        readonly toShapeId?: string | number;  
-        from: string;      
-        to: string;      
+        points?: Array<Point>; 
+        from: number | string;
+        to: number | string;
+        readonly fromPort?: number | string;
+        readonly toPort?: number | string;    
         element?: HTMLElement;    
     }
 }declare module FlowChart {
@@ -171,12 +172,12 @@ declare module FlowChart {
 
         addRange(links: Array<FlowChart.Link>): Array<FlowChart.Link>;
         add(link: FlowChart.Link): FlowChart.Link;        
-        get(from: string , to: string ): FlowChart.Link;
+        get(from: string, to: string, fromPort: string, toPort: string): FlowChart.Link;
+        getById(linkId: string): FlowChart.Link;        
         getByShape(shape: FlowChart.Shape): FlowChart.Link;
         clear(): void;
         removeRange(links: Array<FlowChart.Link>): void;
         remove(link: FlowChart.Link): void;
-
     }
 }declare module FlowChart {
     interface Options {
@@ -211,15 +212,17 @@ declare module FlowChart {
 
 
         readonly length: number;
+  
+        getElement(nodeId: string | number): HTMLElement;
+        getById(shapeIdPortId: string): FlowChart.Port;
+        getByPosition(shape: FlowChart.Shape, position: FlowChart.position): Array<FlowChart.Port>;
+        getByOpositeOfPosition(shapeId: string | number, position: FlowChart.position): Array<FlowChart.Port>;
         getByLink(link: FlowChart.link) : {
             fromShape: FlowChart.Shape,
             toShape: FlowChart.Shape,
             fromPort: FlowChart.Port,
             toPort: FlowChart.Port
         };
-        getElement(nodeId: string | number): HTMLElement;
-        getByPosition(node: FlowChart.Shape, position: FlowChart.position): Array<FlowChart.Port>;
-        getByOpositeOfPosition(nodeId: string | number, position: FlowChart.position): Array<FlowChart.Port>;
         get(shapeId: string | number, portId: string): FlowChart.Port;
     }
 }declare module FlowChart {
@@ -265,8 +268,11 @@ declare module FlowChart {
     }
 
     interface Label extends Shape{
-        from: string;
-        to: string;
+        readonly id?: string | number;
+        from: number | string;
+        to: number | string;
+        readonly fromPort?: number | string;
+        readonly toPort?: number | string;
         position: number;
     }
     
