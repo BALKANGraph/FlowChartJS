@@ -131,6 +131,7 @@ declare class FlowChart {
     clearUndo(): void;
     alignShapes(shapes: Array<FlowChart.Shape>, alignPosition: FlowChart.position, alignToTheFirstNode?: boolean): void;
     reposition(position?: FlowChart.startPosition) : void;
+    ripple(shape: FlowChart.Shape, color: string, callback?: () => void): void;
     onInit(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onUndoRedoChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
