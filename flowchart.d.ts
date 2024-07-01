@@ -411,13 +411,13 @@ declare module FlowChart {
         removeItem(name: string): FlowChart.UIMenuBar;
     }
 }declare module FlowChart {
-    interface UIStatusBar {
+    interface UIShapeBar {
         constructor(chart: FlowChart);
         init(): void;
         html(): string;
     }
 }declare module FlowChart {
-    interface UIShapeBar {        
+    interface UIStatusBar {
         content: string;
         constructor(chart: FlowChart);
         init(): void;
