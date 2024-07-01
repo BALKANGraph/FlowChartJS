@@ -346,7 +346,6 @@ declare module FlowChart {
          * @param shapeId The Shape id to locate in the collection. The value cannot be null.
          */
         contains(shapeId: string | number): boolean;
-        makeVisible(shapes: Array<FlowChart.Shape>): void;
 
 
     }
