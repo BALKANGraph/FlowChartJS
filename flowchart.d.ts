@@ -269,6 +269,14 @@ declare module FlowChart {
         type?: string;        
         selected?: boolean;        
         element?: HTMLElement;
+        fill?: string;
+        stroke?:string;
+        strokeWidth?:number;
+        minWidth?:number;
+        minHeight?:number;
+        resizable?:boolean;
+        ports?: {[key: string]: FlowChart.Port};
+
         [name: string]: any;
     }
 
