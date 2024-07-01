@@ -417,9 +417,9 @@ declare module FlowChart {
         html(): string;
     }
 }declare module FlowChart {
-    interface UIShapeBar {
+    interface UIShapeBar {        
+        content: string;
         constructor(chart: FlowChart);
         init(): void;
-        html(): string;
     }
 }export default FlowChart
