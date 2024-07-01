@@ -368,7 +368,7 @@ declare module FlowChart {
         displayName: string;
         svg(link: FlowChart.Shape) : string;
         html(link: FlowChart.Shape) : string;
-        ports?: [name: string, FlowChart.Point];
+        ports?: {[key: string]: {x: number, y: number}};
         width?: number;
         height?: number;
         minWidth?: number;
