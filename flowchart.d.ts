@@ -275,7 +275,8 @@ declare module FlowChart {
         minWidth?:number;
         minHeight?:number;
         resizable?:boolean;
-        ports?: [name: string, FlowChart.Point];
+        ports?: {[key: string]: {x: number, y: number}};
+
         [name: string]: any;
     }
 
