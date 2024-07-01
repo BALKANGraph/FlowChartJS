@@ -132,6 +132,7 @@ declare class FlowChart {
     alignShapes(shapes: Array<FlowChart.Shape>, alignPosition: FlowChart.position, alignToTheFirstNode?: boolean): void;
     reposition(position?: FlowChart.startPosition) : void;
     ripple(shape: FlowChart.Shape, color: string, callback?: () => void): void;
+    makeShapeVisible(shape: FlowChart.Shape, callback?: () => void): void;
     onInit(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onUndoRedoChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
@@ -315,12 +316,12 @@ declare module FlowChart {
          * Adds the Shapes of the specified collection to the end of the collection.
          * @param shapes The collection whose elements should be added to the end of the ShapeCollection. The collection itself cannot be null, but it can contain elements that are null.
          */
-        addRange(shapes: Array<FlowChart.Shape>): Array<FlowChart.Shape>;         
+        addRange(shapes: Array<FlowChart.Shape>, makeVisible: boolean): Array<FlowChart.Shape>;         
         /**
          * Adds an Shape to the end of the collection.
          * @param shape The shape to be added to the end of the collection. The value cannot be null.
          */
-        add(shape: FlowChart.Shape): FlowChart.Shape;    
+        add(shape: FlowChart.Shape, makeVisible: boolean): FlowChart.Shape;    
         /**
          * Gets Shape by its id.
          * @param shapeId Shape identification number
@@ -345,6 +346,7 @@ declare module FlowChart {
          * @param shapeId The Shape id to locate in the collection. The value cannot be null.
          */
         contains(shapeId: string | number): boolean;
+        makeVisible(shapes: Array<FlowChart.Shape>): void;
 
 
     }
