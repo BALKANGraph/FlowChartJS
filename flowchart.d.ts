@@ -95,7 +95,7 @@ declare class FlowChart {
     static isMobile(): boolean;
     static animate (elements: Array<HTMLElement | SVGElement>, attrStart: Object, attrEnd: Object, duration: number, func: FlowChart.anim, callback?: Function, tick?: boolean): void;
     static linkTemplates: {
-        base: FlowChart.LinkTemplate;
+        rounded: FlowChart.LinkTemplate;
         [name: string]: FlowChart.LinkTemplate;
     }
 
