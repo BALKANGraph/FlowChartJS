@@ -101,10 +101,20 @@ declare class FlowChart {
 
     static shapeTemplates: {
         base: FlowChart.ShapeTemplate;
-        startend: FlowChart.ShapeTemplate;
-        rectangle: FlowChart.ShapeTemplate;
-        diamond: FlowChart.ShapeTemplate;
-        label: FlowChart.ShapeTemplate;
+        startEnd: FlowChart.ShapeTemplate;
+        process: FlowChart.ShapeTemplate;
+        document : FlowChart.ShapeTemplate;
+        decision: FlowChart.ShapeTemplate;
+        inOut: FlowChart.ShapeTemplate;
+        manualInput: FlowChart.ShapeTemplate;
+        preparation: FlowChart.ShapeTemplate;
+        connector: FlowChart.ShapeTemplate;
+        or: FlowChart.ShapeTemplate;
+        data: FlowChart.ShapeTemplate;
+        delay: FlowChart.ShapeTemplate;
+        display: FlowChart.ShapeTemplate;
+        manualLoop: FlowChart.ShapeTemplate;
+        loopLimit: FlowChart.ShapeTemplate;
         [name: string]: FlowChart.ShapeTemplate;
     }
 
