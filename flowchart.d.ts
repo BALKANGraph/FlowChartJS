@@ -58,7 +58,6 @@ declare class FlowChart {
     options: FlowChart.Options;
     element: HTMLElement;
     svgElement: SVGElement;
-    contentElement: HTMLElement;
     uiShapeBar: FlowChart.UIShapeBar;
     uiMenuBar: FlowChart.UIMenuBar;
     uiStatusBar: FlowChart.UIStatusBar;
@@ -141,8 +140,9 @@ declare class FlowChart {
     clearUndo(): void;
     alignShapes(shapes: Array<FlowChart.Shape>, alignPosition: FlowChart.position, alignToTheFirstNode?: boolean): void;
     reposition(position?: FlowChart.startPosition) : void;
-    ripple(shape: FlowChart.Shape, color: string, callback?: () => void): void;
+    rippleShape(shape: FlowChart.Shape, color: string, reverse: boolean, callback?: () => void): void;
     makeShapeVisible(shape: FlowChart.Shape, callback?: () => void): void;
+    animateShape(shape: FlowChart.Shape, callback?: () => void): void;
     onInit(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onUndoRedoChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
@@ -201,8 +201,6 @@ declare module FlowChart {
         startScale?: number;
         interactive?: boolean;
         loadFromSession?: boolean;
-        shapeBar?: boolean;
-        menuBar?: boolean;
         statusBar?: boolean;
         colors?: Array<string>;
         scaleMax?: number;
@@ -410,7 +408,6 @@ declare module FlowChart {
     }
 }declare module FlowChart {
     interface UIMenuBar {
-        displayColorPalette: boolean;
         constructor(chart: FlowChart)
         init(): void;
         addItem(options: {
@@ -419,12 +416,18 @@ declare module FlowChart {
             title: string
         }): FlowChart.UIMenuBar;
         removeItem(name: string): FlowChart.UIMenuBar;
+        show(): void;
+        hide(): void;
+        showColorPalette(): void;
+        hideColorPalette(): void;
     }
 }declare module FlowChart {
     interface UIShapeBar {
+        readonly element: HTMLElement;
         constructor(chart: FlowChart);
         init(): void;
-        html(): string;
+        show(): void;
+        hide(): void;
     }
 }declare module FlowChart {
     interface UIStatusBar {
