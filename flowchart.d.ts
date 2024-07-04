@@ -377,7 +377,7 @@ declare module FlowChart {
         displayName: string;
         svg(link: FlowChart.Shape) : string;
         html(link: FlowChart.Shape) : string;
-        ports?: {[key: string]: {x: number, y: number}};
+        ports(link: FlowChart.Shape) : {[key: string]: {x: number, y: number}};
         width?: number;
         height?: number;
         minWidth?: number;
@@ -397,8 +397,6 @@ declare module FlowChart {
         stroke?: string;
         strokeWidth?: number;
     }
-
-
 }declare module FlowChart {
     interface UIMenu {
         constructor(chart: FlowChart);
