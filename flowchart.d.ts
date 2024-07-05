@@ -378,8 +378,8 @@ declare module FlowChart {
         svg(link: FlowChart.Shape) : string;
         html(link: FlowChart.Shape) : string;
         ports(link: FlowChart.Shape) : {[key: string]: {x: number, y: number}};
-        width?: number;
-        height?: number;
+        width?: number | string;
+        height?: number| string;
         minWidth?: number;
         minHeight?: number;
         fill?: string;
