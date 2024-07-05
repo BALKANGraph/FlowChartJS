@@ -384,9 +384,7 @@ declare module FlowChart {
         minHeight?: number;
         fill?: string;
         stroke?: string;            
-        strokeWidth?: number;            
-        widthFitContent?: boolean;
-        heightFitContent?: boolean;
+        strokeWidth?: number;     
         displayInShapeBar?: boolean;
         displayInPortShapeBar?: boolean;
         resizable?: boolean;
