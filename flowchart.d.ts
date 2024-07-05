@@ -114,6 +114,7 @@ declare class FlowChart {
         display: FlowChart.ShapeTemplate;
         manualLoop: FlowChart.ShapeTemplate;
         loopLimit: FlowChart.ShapeTemplate;
+        label: FlowChart.ShapeTemplate;        
         [name: string]: FlowChart.ShapeTemplate;
     }
 
@@ -188,7 +189,7 @@ declare module FlowChart {
         addRange(links: Array<FlowChart.Link>): Array<FlowChart.Link>;
         add(link: FlowChart.Link): FlowChart.Link;        
         get(from: string, to: string, fromPort: string, toPort: string): FlowChart.Link;
-        getById(linkId: string): FlowChart.Link;        
+        //getById(linkId: string): FlowChart.Link;        
         getByShape(shape: FlowChart.Shape): FlowChart.Link;
         clear(): void;
         removeRange(links: Array<FlowChart.Link>): void;
@@ -227,7 +228,7 @@ declare module FlowChart {
         readonly length: number;
   
         getElement(nodeId: string | number): HTMLElement;
-        getById(shapeIdPortId: string): FlowChart.Port;
+        //getById(shapeIdPortId: string): FlowChart.Port;
         getByPosition(shape: FlowChart.Shape, position: FlowChart.position): Array<FlowChart.Port>;
         getByOpositeOfPosition(shapeId: string | number, position: FlowChart.position): Array<FlowChart.Port>;
         getByLink(link: FlowChart.link) : {
