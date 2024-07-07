@@ -63,8 +63,8 @@ declare class FlowChart {
     uiStatusBar: FlowChart.UIStatusBar;
     shapeContextMenu: FlowChart.UIMenu;
     editor: FlowChart.Editor;
-    readonly nodes: FlowChart.ShapeCollection;   
-    readonly labels: FlowChart.ShapeCollection;   
+    readonly nodes: FlowChart.NodeCollection;   
+    readonly labels: FlowChart.LabelCollection;   
     readonly links: FlowChart.LinkCollection;        
     readonly ports: FlowChart.PortCollection;  
 
@@ -130,7 +130,7 @@ declare class FlowChart {
     text(options?: Array<string>): string;
     svg(): string;
     exportSVG(): void;
-
+    addNodeWithLink(fromPort: FlowChart.Port, templateId: string, callback?: (node: FlowChart.Node, link: FlowChart.Link) => void): FlowChart.Node;
     getShape(id: string | number): FlowChart.Shape;
     generateId(): string;
     undo(): void;
@@ -145,7 +145,9 @@ declare class FlowChart {
     makeShapeVisible(shape: FlowChart.Shape, callback?: () => void): void;
     animateShape(shape: FlowChart.Shape, callback?: () => void): void;
     onInit(listener: (this: FlowChart, args: {}) => void): FlowChart;
-    onChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
+    onChanged(listener: (this: FlowChart, args: {
+        properties?: Array<string>
+    }) => void): FlowChart;
     onUndoRedoChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onSelectedShapesChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;    
     onSelectedPortChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;    
@@ -176,24 +178,6 @@ declare module FlowChart {
         readonly fromPort?: number | string;
         readonly toPort?: number | string;    
         element?: HTMLElement;    
-    }
-}declare module FlowChart {
-    interface LinkCollection {
-        constructor(chart: FlowChart);    
-
-
-        readonly length: number;
-        readonly last: FlowChart.Link;
-        readonly first: FlowChart.Link;
-
-        addRange(links: Array<FlowChart.Link>): Array<FlowChart.Link>;
-        add(link: FlowChart.Link): FlowChart.Link;        
-        get(from: string, to: string, fromPort: string, toPort: string): FlowChart.Link;
-        //getById(linkId: string): FlowChart.Link;        
-        getByShape(shape: FlowChart.Shape): FlowChart.Link;
-        clear(): void;
-        removeRange(links: Array<FlowChart.Link>): void;
-        remove(link: FlowChart.Link): void;
     }
 }declare module FlowChart {
     interface Options {
@@ -267,7 +251,13 @@ declare module FlowChart {
     }
 }
 declare module FlowChart {
+    interface Point{
+        x: number;
+        y: number;
+    }
+
     interface Shape{
+        readonly id?: string | number;
         templateId?: string;
         readonly left?: number;
         readonly right?: number;
@@ -277,20 +267,18 @@ declare module FlowChart {
         height?: number;        
         type?: string;        
         selected?: boolean;        
-        element?: HTMLElement;
-        fill?: string;
+        element?: HTMLElement;        
         stroke?:string;
         strokeWidth?:number;
-        minWidth?:number;
-        minHeight?:number;
-        resizable?:boolean;
-        ports?: {[key: string]: {x: number, y: number}};
-
         [name: string]: any;
     }
 
     interface Label extends Shape{
-        readonly id?: string | number;
+        minWidth?:number;
+        minHeight?:number;
+        resizable?:boolean;
+        ports?: {[key: string]: {x: number, y: number}};
+        fill?: string;
         from: number | string;
         to: number | string;
         readonly fromPort?: number | string;
@@ -298,73 +286,64 @@ declare module FlowChart {
         position: number;
     }
     
-    interface Node extends Shape{        
+    interface Node extends Shape{     
+        minWidth?:number;
+        minHeight?:number;
+        resizable?:boolean;
+        ports?: {[key: string]: {x: number, y: number}};  
+        fill?: string; 
         id: string | number;
         x: number;
         y: number;  
     }
+
+    interface Link extends Shape{        
+        readonly width?: number;
+        readonly height?: number;  
+        templateId?: string
+        points?: Array<Point>; 
+        from: number | string;
+        to: number | string;
+        readonly fromPort?: number | string;
+        readonly toPort?: number | string;    
+    }
 }declare module FlowChart {
     interface ShapeCollection{
-
-
-
         constructor(chart: FlowChart);  
+        clear(): void;        
+        remove(shape: FlowChart.Shape): void;
+        removeRange(shapes: Array<FlowChart.Shape>): void;
+        contains(shapeId: string | number): boolean;
+    }
 
+    interface NodeCollection  extends ShapeCollection{
+        readonly last: FlowChart.Node;
+        readonly first: FlowChart.Node;     
         readonly top: number;  
         readonly bottom: number;  
         readonly left: number;  
         readonly right: number;  
-
-                /**
-         * Gets the last Shape from the collection
-         */
-        readonly last: FlowChart.Shape;
-
-        /**
-         * Gets the first Shape from the collection
-         */
-        readonly first: FlowChart.Shape;     
-
-        /**
-         * Gets the number of shapes in the collection.
-         */
         readonly length: number;
-        /**
-         * Adds the Shapes of the specified collection to the end of the collection.
-         * @param shapes The collection whose elements should be added to the end of the ShapeCollection. The collection itself cannot be null, but it can contain elements that are null.
-         */
-        addRange(shapes: Array<FlowChart.Shape>, makeVisible: boolean): Array<FlowChart.Shape>;         
-        /**
-         * Adds an Shape to the end of the collection.
-         * @param shape The shape to be added to the end of the collection. The value cannot be null.
-         */
-        add(shape: FlowChart.Shape, makeVisible: boolean): FlowChart.Shape;    
-        /**
-         * Gets Shape by its id.
-         * @param shapeId Shape identification number
-         */    
-        get(shapeId: string | number): FlowChart.Shape; 
-        /**
-         * Removes all Shapes from the collection.
-         */               
-        clear(): void;        
-        /**
-         * Removes Shape from the collection.
-         * @param shape The Shape to remove from the collection. The value cannot be null.
-         */
-        remove(shape: FlowChart.Shape): void;
-        /**
-         * Removes a range of Shapes from the collection.
-         * @param shapes Shapes to be removed from the collection. 
-         */
-        removeRange(shapes: Array<FlowChart.Shape>): void;
-        /**
-         * Determines whether an Shape ith shapeId is in the collection.
-         * @param shapeId The Shape id to locate in the collection. The value cannot be null.
-         */
-        contains(shapeId: string | number): boolean;
+        addRange(nodes: Array<FlowChart.Node>): Array<FlowChart.Node>;         
+        add(node: FlowChart.Node): FlowChart.Node;    
+        get(nodeId: string | number): FlowChart.Node; 
+    }
 
+    interface LabelCollection extends ShapeCollection{
+        readonly last: FlowChart.Label;
+        readonly first: FlowChart.Label;     
+        addRange(labels: Array<FlowChart.Label>): Array<FlowChart.Label>;         
+        add(label: FlowChart.Label): FlowChart.Label;    
+        get(labelId: string | number): FlowChart.Label; 
+    }
 
+    interface LinkCollection  extends ShapeCollection{
+        readonly last: FlowChart.Link;
+        readonly first: FlowChart.Link;
+        addRange(links: Array<FlowChart.Link>): Array<FlowChart.Link>;
+        add(link: FlowChart.Link): FlowChart.Link;        
+        get(from: string, to: string, fromPort: string, toPort: string): FlowChart.Link;
+        getByShape(shape: FlowChart.Shape): FlowChart.Link;
     }
 }
 declare module FlowChart {
