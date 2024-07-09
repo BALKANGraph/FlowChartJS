@@ -8,6 +8,27 @@
     }
 }
 declare module FlowChart {
+    enum anim {
+        inPow,
+        outPow,
+        inOutPow,
+        inSin,
+        outSin,
+        inOutSin,
+        inExp,
+        outExp,
+        inOutExp,
+        inCirc,
+        outCirc,
+        inOutCirc,
+        rebound,
+        inBack,
+        outBack,
+        inOutBack,
+        impulse,
+        expPulse
+    }
+    
     enum position{
         top,
         bottom,
@@ -213,7 +234,7 @@ declare module FlowChart {
         //getById(shapeIdPortId: string): FlowChart.Port;
         getByPosition(shape: FlowChart.Shape, position: FlowChart.position): Array<FlowChart.Port>;
         getByOpositeOfPosition(shapeId: string | number, position: FlowChart.position): Array<FlowChart.Port>;
-        getByLink(link: FlowChart.link) : {
+        getByLink(link: FlowChart.Link) : {
             fromShape: FlowChart.Shape,
             toShape: FlowChart.Shape,
             fromPort: FlowChart.Port,
@@ -302,11 +323,11 @@ declare module FlowChart {
         readonly toPort?: number | string;    
     }
 }declare module FlowChart {
-    interface ShapeCollection{
+    interface ShapeCollection {
         clear(): void;        
         remove(shape: FlowChart.Shape): void;
         removeRange(shapes: Array<FlowChart.Shape>): void;
-        contains(shapeId: string | number): boolean;
+        contains(shapeId: string | number): boolean;      
     }
 
     interface NodeCollection  extends ShapeCollection{
