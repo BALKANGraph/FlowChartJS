@@ -1,6 +1,5 @@
 ﻿declare module FlowChart {
     interface Editor {
-        constructor(chart: FlowChart);
         exit(): void;
         editNextField(): void;
         removeField(shapeId: string | number, field: string): void;
@@ -121,9 +120,9 @@ declare class FlowChart {
     constructor(element: HTMLElement | string, options?: FlowChart.Options);
 
     load(data: {
-        nodes: Array<FlowChart.Shape>,
-        labels: Array<FlowChart.Shape>,
-        links: Array<FlowChart.Link>,
+        nodes?: Array<FlowChart.Shape>,
+        labels?: Array<FlowChart.Shape>,
+        links?: Array<FlowChart.Link>,
     }): void;
 
     json(options?: Array<string>): JSON;
@@ -206,7 +205,6 @@ declare module FlowChart {
     }
 }declare module FlowChart {
     interface PortCollection {
-        constructor(chart: FlowChart);    
 
 
         readonly length: number;
@@ -225,10 +223,6 @@ declare module FlowChart {
     }
 }declare module FlowChart {
     interface SelectedShapeCollection{
-
-        constructor(chart: FlowChart);  
-
-
 
         readonly last: FlowChart.Shape;
         readonly first: FlowChart.Shape;
@@ -309,7 +303,6 @@ declare module FlowChart {
     }
 }declare module FlowChart {
     interface ShapeCollection{
-        constructor(chart: FlowChart);  
         clear(): void;        
         remove(shape: FlowChart.Shape): void;
         removeRange(shapes: Array<FlowChart.Shape>): void;
@@ -377,14 +370,12 @@ declare module FlowChart {
     }
 }declare module FlowChart {
     interface UIMenu {
-        constructor(chart: FlowChart);
         init(): void;
         hide(): void;
         show(x: number, y: number, nodeId: string | number, menu: any): void;
     }
 }declare module FlowChart {
     interface UIMenuBar {
-        constructor(chart: FlowChart)
         init(): void;
         addItem(options: {
             name: string,
@@ -400,7 +391,6 @@ declare module FlowChart {
 }declare module FlowChart {
     interface UIShapeBar {
         readonly element: HTMLElement;
-        constructor(chart: FlowChart);
         init(): void;
         show(): void;
         hide(): void;
@@ -408,7 +398,6 @@ declare module FlowChart {
 }declare module FlowChart {
     interface UIStatusBar {
         content: string;
-        constructor(chart: FlowChart);
         init(): void;
     }
 }export default FlowChart
