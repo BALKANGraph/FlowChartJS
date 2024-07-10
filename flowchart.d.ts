@@ -328,6 +328,7 @@ declare module FlowChart {
         remove(shape: FlowChart.Shape): void;
         removeRange(shapes: Array<FlowChart.Shape>): void;
         contains(shapeId: string | number): boolean;      
+        [index: number]: FlowChart.Shape;
     }
 
     interface NodeCollection  extends ShapeCollection{
