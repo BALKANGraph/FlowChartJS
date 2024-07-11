@@ -181,25 +181,7 @@ declare class FlowChart {
     }) => void): FlowChart; 
 }
 
-
-declare module FlowChart {
-    
-    interface Point{
-        x: number;
-        y: number;
-    }
-
-    interface Link{
-        readonly id?: string | number;
-        templateId?: string
-        points?: Array<Point>; 
-        from: number | string;
-        to: number | string;
-        readonly fromPort?: number | string;
-        readonly toPort?: number | string;    
-        element?: HTMLElement;    
-    }
-}declare module FlowChart {
+declare module FlowChart {
     interface Options {
         mode?: string;
         startPosition?: FlowChart.startPosition;
@@ -312,6 +294,8 @@ declare module FlowChart {
         y: number;  
     }
 
+        
+    
     interface Link extends Shape{        
         readonly width?: number;
         readonly height?: number;  
@@ -373,6 +357,7 @@ declare module FlowChart {
         svg(link: FlowChart.Shape) : string;
         html(link: FlowChart.Shape) : string;
         ports(link: FlowChart.Shape) : {[key: string]: {x: number, y: number}};
+        offset (shape: FlowChart.Shape) : {x: number, y: number};
         width?: number | string;
         height?: number| string;
         minWidth?: number;
