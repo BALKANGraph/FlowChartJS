@@ -278,8 +278,8 @@ declare module FlowChart {
         fill?: string;
         from: number | string;
         to: number | string;
-        readonly fromPort?: number | string;
-        readonly toPort?: number | string;
+        fromPort?: number | string;
+        toPort?: number | string;
         position: number;
     }
     
@@ -303,8 +303,8 @@ declare module FlowChart {
         points?: Array<Point>; 
         from: number | string;
         to: number | string;
-        readonly fromPort?: number | string;
-        readonly toPort?: number | string;    
+        fromPort?: number | string;
+        toPort?: number | string;    
     }
 }declare module FlowChart {
     interface ShapeCollection {
@@ -406,5 +406,7 @@ declare module FlowChart {
     interface UIStatusBar {
         content: string;
         init(): void;
+        show(): void;
+        hide(): void;
     }
 }export default FlowChart
