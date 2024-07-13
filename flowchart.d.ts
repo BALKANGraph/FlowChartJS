@@ -371,7 +371,10 @@ declare module FlowChart {
     }
 
     interface LinkTemplate{
-        svg(link: FlowChart.Link) : string;
+        path(link: FlowChart.Link): string;
+        markerStart(link: FlowChart.Link, markerId: string): string;
+        markerEnd(link: FlowChart.Link, markerId: string): string;
+        svg(link: FlowChart.Link, markerStartId: string, markerEndId: string): string;    
         stroke?: string;
         strokeWidth?: number;
     }
