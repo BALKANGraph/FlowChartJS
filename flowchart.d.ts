@@ -372,11 +372,12 @@ declare module FlowChart {
 
     interface LinkTemplate{
         path(link: FlowChart.Link): string;
-        markerStart(link: FlowChart.Link, markerId: string): string;
-        markerEnd(link: FlowChart.Link, markerId: string): string;
-        svg(link: FlowChart.Link, markerStartId: string, markerEndId: string): string;    
+        svg(link: FlowChart.Link): string;    
         stroke?: string;
-        strokeWidth?: number;
+        strokeWidth?: number;        
+        markerStart?: string;
+        markerEnd?: string;
+        markerMid?: string;
     }
 }declare module FlowChart {
     interface UIMenu {
