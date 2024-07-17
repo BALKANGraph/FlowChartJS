@@ -92,6 +92,7 @@ declare class FlowChart {
 
     selectedShapes: FlowChart.SelectedShapeCollection; 
     viewBox: Array<number>; 
+    defs: string; 
     selectedPortShape: FlowChart.Shape;     
     selectedPort: FlowChart.Port;      
     scale: number;          
