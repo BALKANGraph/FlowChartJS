@@ -183,7 +183,7 @@ declare class FlowChart {
 }
 
 
-export default FlowChart;
+
 declare module FlowChart {
     interface Options {
         mode?: string;
