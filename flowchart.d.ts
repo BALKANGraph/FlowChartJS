@@ -162,7 +162,7 @@ declare class FlowChart {
     clearUndo(): void;
     alignShapes(shapes: Array<FlowChart.Shape>, alignPosition: FlowChart.position, alignToTheFirstNode?: boolean): void;
     reposition(position?: FlowChart.startPosition) : void;
-    rippleShape(shape: FlowChart.Shape, color: string, reverse: boolean, callback?: () => void): void;
+    rippleShape(shape: FlowChart.Shape, color: string, callback?: () => void): void;
     makeShapeVisible(shape: FlowChart.Shape, callback?: () => void): void;
     animateShape(shape: FlowChart.Shape, callback?: () => void): void;
     onInit(listener: (this: FlowChart, args: {}) => void): FlowChart;
@@ -182,6 +182,8 @@ declare class FlowChart {
     }) => void): FlowChart; 
 }
 
+
+export default FlowChart;
 declare module FlowChart {
     interface Options {
         mode?: string;
@@ -311,8 +313,7 @@ declare module FlowChart {
     interface ShapeCollection {
         clear(): void;        
         remove(shape: FlowChart.Shape): void;
-        removeRange(shapes: Array<FlowChart.Shape>): void;
-        contains(shapeId: string | number): boolean;      
+        removeRange(shapes: Array<FlowChart.Shape>): void;             
         [index: number]: FlowChart.Shape;
     }
 
@@ -327,6 +328,7 @@ declare module FlowChart {
         addRange(nodes: Array<FlowChart.Node>): Array<FlowChart.Node>;         
         add(node: FlowChart.Node): FlowChart.Node;    
         get(nodeId: string | number): FlowChart.Node; 
+        contains(nodeId: string | number): boolean; 
     }
 
     interface LabelCollection extends ShapeCollection{
@@ -334,7 +336,8 @@ declare module FlowChart {
         readonly first: FlowChart.Label;     
         addRange(labels: Array<FlowChart.Label>): Array<FlowChart.Label>;         
         add(label: FlowChart.Label): FlowChart.Label;    
-        get(labelId: string | number): FlowChart.Label; 
+        get(from: string, to: string, position: number, fromPort?: string, toPort?: string): FlowChart.Label; 
+        contains(from: string, to: string, position: number, fromPort?: string, toPort?: string): boolean; 
     }
 
     interface LinkCollection  extends ShapeCollection{
@@ -342,8 +345,9 @@ declare module FlowChart {
         readonly first: FlowChart.Link;
         addRange(links: Array<FlowChart.Link>): Array<FlowChart.Link>;
         add(link: FlowChart.Link): FlowChart.Link;        
-        get(from: string, to: string, fromPort: string, toPort: string): FlowChart.Link;
+        get(from: string, to: string, fromPort?: string, toPort?: string): FlowChart.Link;
         getByShape(shape: FlowChart.Shape): FlowChart.Link;
+        contains(from: string, to: string, fromPort?: string, toPort?: string): boolean; 
     }
 }
 declare module FlowChart {
