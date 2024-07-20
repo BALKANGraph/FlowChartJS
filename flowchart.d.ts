@@ -78,10 +78,10 @@ declare class FlowChart {
     options: FlowChart.Options;
     element: HTMLElement;
     svgElement: SVGElement;
-    uiShapeBar: FlowChart.UIShapeBar;
-    uiMenuBar: FlowChart.UIMenuBar;
-    uiStatusBar: FlowChart.UIStatusBar;
-    shapeContextMenu: FlowChart.UIMenu;
+    shapeBar: FlowChart.ShapeBar;
+    menuBar: FlowChart.MenuBar;
+    statusBar: FlowChart.StatusBar;
+    shapeContextMenu: FlowChart.Menu;
     editor: FlowChart.Editor;
     readonly nodes: FlowChart.NodeCollection;   
     readonly labels: FlowChart.LabelCollection;   
@@ -385,34 +385,34 @@ declare module FlowChart {
         markerMid?: string;
     }
 }declare module FlowChart {
-    interface UIMenu {
+    interface Menu {
         init(): void;
         hide(): void;
         show(x: number, y: number, nodeId: string | number, menu: any): void;
     }
 }declare module FlowChart {
-    interface UIMenuBar {
+    interface MenuBar {
         init(): void;
         addItem(options: {
             name: string,
             icon: string,
             title: string
-        }): FlowChart.UIMenuBar;
-        removeItem(name: string): FlowChart.UIMenuBar;
+        }): FlowChart.MenuBar;
+        removeItem(name: string): FlowChart.MenuBar;
         show(): void;
         hide(): void;
         showColorPalette(): void;
         hideColorPalette(): void;
     }
 }declare module FlowChart {
-    interface UIShapeBar {
+    interface ShapeBar {
         readonly element: HTMLElement;
         init(): void;
         show(): void;
         hide(): void;
     }
 }declare module FlowChart {
-    interface UIStatusBar {
+    interface StatusBar {
         content: string;
         init(): void;
         show(): void;
