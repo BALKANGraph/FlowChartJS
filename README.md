@@ -1,4 +1,5 @@
-# FlowChart JS
+
+# ![FlowChart JS](https://balkangraph.com/content/img/icon-FlowChartJS.png) FlowChart JS
 Create flowcharts in seconds with BALKAN FlowChart JS.
 
 

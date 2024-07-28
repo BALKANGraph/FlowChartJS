@@ -277,6 +277,7 @@ declare module FlowChart {
         minWidth?:number;
         minHeight?:number;
         resizable?:boolean;
+        static?:boolean;
         ports?: {[key: string]: {x: number, y: number}};
         fill?: string;
         from: number | string;
@@ -290,6 +291,7 @@ declare module FlowChart {
         minWidth?:number;
         minHeight?:number;
         resizable?:boolean;
+        static?:boolean;
         ports?: {[key: string]: {x: number, y: number}};  
         fill?: string; 
         id: string | number;
@@ -373,6 +375,7 @@ declare module FlowChart {
         displayInShapeBar?: boolean;
         displayInPortShapeBar?: boolean;
         resizable?: boolean;
+        static?: boolean;
     }
 
     interface LinkTemplate{
