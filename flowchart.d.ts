@@ -171,7 +171,10 @@ declare class FlowChart {
     }) => void): FlowChart;
     onUndoRedoChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onSelectedShapesChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;    
-    onSelectedPortChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;    
+    onSelectedPortChange(listener: (this: FlowChart, args: {
+        oldPort: FlowChart.Port,
+        newPort: FlowChart.Port,
+    }) => void): FlowChart;    
     onShortcut(listener: (this: FlowChart, args: {
         name: string,
         event: Event
@@ -180,6 +183,14 @@ declare class FlowChart {
         name: string,
         event: Event
     }) => void): FlowChart; 
+    onLinkPoints(listener: (this: FlowChart, args: {
+        fromShape: FlowChart.Shape,
+        toShape: FlowChart.Shape,
+        fromPort: FlowChart.Port,
+        tpPort: FlowChart.Port,
+        points: Array<FlowChart.Point>
+    }) => void): FlowChart;    
+
 }
 
 
@@ -309,7 +320,7 @@ declare module FlowChart {
         from: number | string;
         to: number | string;
         fromPort?: number | string;
-        toPort?: number | string;    
+        toPort?: number | string;  
     }
 }declare module FlowChart {
     interface ShapeCollection {
