@@ -81,7 +81,6 @@ declare class FlowChart {
     shapeBar: FlowChart.ShapeBar;
     menuBar: FlowChart.MenuBar;
     statusBar: FlowChart.StatusBar;
-    shapeContextMenu: FlowChart.Menu;
     editor: FlowChart.Editor;
     readonly nodes: FlowChart.NodeCollection;   
     readonly labels: FlowChart.LabelCollection;   
@@ -164,7 +163,7 @@ declare class FlowChart {
     reposition(position?: FlowChart.startPosition) : void;
     rippleShape(shape: FlowChart.Shape, color: string, callback?: () => void): void;
     makeShapeVisible(shape: FlowChart.Shape, callback?: () => void): void;
-    animateShape(shape: FlowChart.Shape, callback?: () => void): void;
+    //animateShape(shape: FlowChart.Shape, callback?: () => void): void;
     onInit(listener: (this: FlowChart, args: {}) => void): FlowChart;
     onChanged(listener: (this: FlowChart, args: {
         properties?: Array<string>
@@ -190,6 +189,17 @@ declare class FlowChart {
         tpPort: FlowChart.Port,
         points: Array<FlowChart.Point>
     }) => void): FlowChart;    
+
+    onShapeDoubleClick(listener: (this: FlowChart, args: {
+        event: Event,
+        shapeId: number | string
+    }) => void): FlowChart; 
+
+    
+    onShapeClick(listener: (this: FlowChart, args: {
+        event: Event,
+        shapeId: number | string
+    }) => void): FlowChart;     
 
 }
 
@@ -285,6 +295,7 @@ declare module FlowChart {
     }
 
     interface Label extends Shape{
+        opacity?:number;
         minWidth?:number;
         minHeight?:number;
         resizable?:boolean;
@@ -299,6 +310,7 @@ declare module FlowChart {
     }
     
     interface Node extends Shape{     
+        opacity?:number;
         minWidth?:number;
         minHeight?:number;
         resizable?:boolean;
