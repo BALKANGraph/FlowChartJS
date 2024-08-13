@@ -201,6 +201,12 @@ declare class FlowChart {
         shapeId: number | string
     }) => void): FlowChart;     
 
+    onSvgClick(listener: (this: FlowChart, args: {
+        event: Event
+    }) => void): FlowChart;     
+
+    
+
 }
 
 
@@ -327,6 +333,8 @@ declare module FlowChart {
     interface Link extends Shape{        
         readonly width?: number;
         readonly height?: number;  
+        readonly length?: number; 
+        readonly pathElement?: HTMLElement;    
         templateId?: string
         points?: Array<Point>; 
         from: number | string;
