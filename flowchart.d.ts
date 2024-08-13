@@ -82,6 +82,7 @@ declare class FlowChart {
     menuBar: FlowChart.MenuBar;
     statusBar: FlowChart.StatusBar;
     editor: FlowChart.Editor;
+    callChangeListener: boolean;
     readonly nodes: FlowChart.NodeCollection;   
     readonly labels: FlowChart.LabelCollection;   
     readonly links: FlowChart.LinkCollection;        
@@ -298,6 +299,7 @@ declare module FlowChart {
         stroke?:string;
         strokeWidth?:number;
         [name: string]: any;
+        layer: number;
     }
 
     interface Label extends Shape{
@@ -305,6 +307,7 @@ declare module FlowChart {
         minWidth?:number;
         minHeight?:number;
         resizable?:boolean;
+        selectable?:boolean;
         static?:boolean;
         ports?: {[key: string]: {x: number, y: number}};
         fill?: string;
@@ -320,7 +323,8 @@ declare module FlowChart {
         minWidth?:number;
         minHeight?:number;
         resizable?:boolean;
-        static?:boolean;
+        selectable?:boolean;
+        movable?:boolean;
         ports?: {[key: string]: {x: number, y: number}};  
         fill?: string; 
         id: string | number;
