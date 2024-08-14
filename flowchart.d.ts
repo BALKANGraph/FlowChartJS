@@ -1,10 +1,11 @@
 ﻿declare module FlowChart {
     interface Editor {
-        exit(): void;
-        editNextField(): void;
-        removeField(shapeId: string | number, field: string): void;
-        addField(shapeId: string | number, field: string): void;
-        edit(nodeId: string | number, fieldName: string): void;
+        blur(): void;    
+        clearFieldBorders(): void;    
+        editFirstFieldIfExist(shape: FlowChart.Shape): void;    
+        getFieldNames(shape: FlowChart.Shape): Array<string>;    
+        hasActiveField(shape: FlowChart.Shape): boolean;    
+        edit(shape: FlowChart.Shape, fieldName?: string): void;   
     }
 }
 declare module FlowChart {
