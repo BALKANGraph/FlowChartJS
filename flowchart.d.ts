@@ -83,7 +83,7 @@ declare class FlowChart {
     menuBar: FlowChart.MenuBar;
     statusBar: FlowChart.StatusBar;
     editor: FlowChart.Editor;
-    callChangeListener: boolean;
+    useChangeListener: boolean;
     readonly nodes: FlowChart.NodeCollection;   
     readonly labels: FlowChart.LabelCollection;   
     readonly links: FlowChart.LinkCollection;        
@@ -205,9 +205,14 @@ declare class FlowChart {
 
     onSvgClick(listener: (this: FlowChart, args: {
         event: Event
-    }) => void): FlowChart;     
-
+    }) => void): FlowChart;  
     
+    onFieldChange(listener: (this: FlowChart, args: {
+        shape: FlowChart.Shape,
+        newValue: string,
+        oldValue: string,
+        fieldName: string
+    }) => void): FlowChart;       
 
 }
 
@@ -220,6 +225,7 @@ declare class FlowChart {
         startScale?: number;
         interactive?: boolean;
         loadFromSession?: boolean;
+        useSession?: boolean;
         statusBar?: boolean;
         colors?: Array<string>;
         scaleMax?: number;
