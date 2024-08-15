@@ -2,7 +2,7 @@
     interface Editor {
         blur(): void;    
         clearFieldBorders(): void;    
-        editFirstFieldIfExist(shape: FlowChart.Shape): void;    
+        editFirstFieldIfAny(shape: FlowChart.Shape): void;    
         getFieldNames(shape: FlowChart.Shape): Array<string>;    
         hasActiveField(shape: FlowChart.Shape): boolean;    
         edit(shape: FlowChart.Shape, fieldName?: string): void;   
