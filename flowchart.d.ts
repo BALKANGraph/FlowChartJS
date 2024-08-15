@@ -315,6 +315,7 @@ declare module FlowChart {
         minHeight?:number;
         resizable?:boolean;
         selectable?:boolean;
+        movable?:boolean;
         ports?: {[key: string]: {x: number, y: number}};
         fill?: string;
         from: number | string;
