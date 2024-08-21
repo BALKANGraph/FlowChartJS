@@ -1,4 +1,11 @@
 ﻿declare module FlowChart {
+    interface ColorBar {
+        readonly element: HTMLElement;
+        init(): void;
+        show(): void;
+        hide(): void;
+    }
+}declare module FlowChart {
     interface Editor {
         blur(): void;    
         clearFieldBorders(): void;    
@@ -80,6 +87,7 @@ declare class FlowChart {
     element: HTMLElement;
     svgElement: SVGElement;
     shapeBar: FlowChart.ShapeBar;
+    colorBar: FlowChart.ColorBar;
     menuBar: FlowChart.MenuBar;
     statusBar: FlowChart.StatusBar;
     editor: FlowChart.Editor;
@@ -219,6 +227,19 @@ declare class FlowChart {
 
 
 declare module FlowChart {
+    interface Menu {
+        init(): void;
+        hide(): void;
+        show(x: number, y: number, nodeId: string | number, menu: any): void;
+    }
+}declare module FlowChart {
+    interface MenuBar {
+        readonly element: HTMLElement;
+        init(): void;
+        show(): void;
+        hide(): void;
+    }
+}declare module FlowChart {
     interface Options {
         mode?: string;
         startPosition?: FlowChart.startPosition;
@@ -354,6 +375,13 @@ declare module FlowChart {
         toPort?: number | string;  
     }
 }declare module FlowChart {
+    interface ShapeBar {
+        readonly element: HTMLElement;
+        init(): void;
+        show(): void;
+        hide(): void;
+    }
+}declare module FlowChart {
     interface ShapeCollection {
         clear(): void;        
         remove(shape: FlowChart.Shape): void;
@@ -401,6 +429,13 @@ declare module FlowChart {
         activeComponentType: string;
     }
 }declare module FlowChart {
+    interface StatusBar {
+        content: string;
+        init(): void;
+        show(): void;
+        hide(): void;
+    }
+}declare module FlowChart {
     interface ShapeTemplate{
         displayName: string;
         svg(link: FlowChart.Shape) : string;
@@ -428,39 +463,5 @@ declare module FlowChart {
         markerStart?: string;
         markerEnd?: string;
         markerMid?: string;
-    }
-}declare module FlowChart {
-    interface Menu {
-        init(): void;
-        hide(): void;
-        show(x: number, y: number, nodeId: string | number, menu: any): void;
-    }
-}declare module FlowChart {
-    interface MenuBar {
-        init(): void;
-        addItem(options: {
-            name: string,
-            icon: string,
-            title: string
-        }): FlowChart.MenuBar;
-        removeItem(name: string): FlowChart.MenuBar;
-        show(): void;
-        hide(): void;
-        showColorPalette(): void;
-        hideColorPalette(): void;
-    }
-}declare module FlowChart {
-    interface ShapeBar {
-        readonly element: HTMLElement;
-        init(): void;
-        show(): void;
-        hide(): void;
-    }
-}declare module FlowChart {
-    interface StatusBar {
-        content: string;
-        init(): void;
-        show(): void;
-        hide(): void;
     }
 }export default FlowChart
