@@ -238,7 +238,8 @@ declare class FlowChart {
         init(): void;
         show(): void;
         hide(): void;
-        addItem(): FlowChart
+        addItem(): FlowChart;
+        removeItem(): FlowChart;
     }
 }declare module FlowChart {
     interface Options {
