@@ -93,6 +93,7 @@ declare class FlowChart {
     editor: FlowChart.Editor;
     useChangeListener: boolean;
     mode: string;
+    active?: boolean;
     readonly nodes: FlowChart.NodeCollection;   
     readonly labels: FlowChart.LabelCollection;   
     readonly links: FlowChart.LinkCollection;        
