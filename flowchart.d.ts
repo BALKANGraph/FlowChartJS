@@ -247,7 +247,9 @@ declare class FlowChart {
     interface Options {
         mode?: string;
         startPosition?: FlowChart.startPosition;
-        startScale?: number;
+        startScale?: number;        
+        selectable?: boolean;
+        editable?: boolean;
         interactive?: boolean;
         loadFromSession?: boolean;
         useSession?: boolean;
