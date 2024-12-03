@@ -202,6 +202,11 @@ declare class FlowChart {
         points: Array<FlowChart.Point>
     }) => void): FlowChart;    
 
+    onLinkClick(listener: (this: FlowChart, args: {
+        event: Event,
+        linkId: number | string
+    }) => void): FlowChart;   
+
     onShapeDoubleClick(listener: (this: FlowChart, args: {
         event: Event,
         shapeId: number | string
