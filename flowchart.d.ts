@@ -74,6 +74,7 @@ declare module FlowChart {
         fitHeight,
         fitWidth,
         fit,
+        fit1,
         centerTop,
         centerBottom,
         centerLeft,
@@ -172,7 +173,7 @@ declare class FlowChart {
     clearRedo(): void;
     clearUndo(): void;
     alignShapes(shapes: Array<FlowChart.Shape>, alignPosition: FlowChart.position, alignToTheFirstNode?: boolean): void;
-    reposition(position?: FlowChart.startPosition) : void;
+    reposition(position?: FlowChart.startPosition, shouldAnimate?: boolean, callback?: () => void) : void;
     rippleShape(shape: FlowChart.Shape, color: string, callback?: () => void): void;
     makeShapeVisible(shape: FlowChart.Shape, callback?: () => void): void;
     //animateShape(shape: FlowChart.Shape, callback?: () => void): void;
