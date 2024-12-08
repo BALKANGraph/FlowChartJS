@@ -446,6 +446,7 @@ declare module FlowChart {
         init(): void;
         show(): void;
         hide(): void;
+        isVisible(): boolean;
     }
 }declare module FlowChart {
     interface ShapeTemplate{
