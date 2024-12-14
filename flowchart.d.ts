@@ -173,7 +173,7 @@ declare class FlowChart {
     clearRedo(): void;
     clearUndo(): void;
     alignShapes(shapes: Array<FlowChart.Shape>, alignPosition: FlowChart.position, alignToTheFirstNode?: boolean): void;
-    reposition(position?: FlowChart.startPosition, shape?: FlowChart.Shape, shouldAnimate?: boolean, callback?: () => void) : void;
+    reposition(position?: FlowChart.startPosition, shapes?: Array<FlowChart.Shape>, shouldAnimate?: boolean, callback?: () => void) : void;
     rippleShape(shape: FlowChart.Shape, color: string, callback?: () => void): void;
     makeShapeVisible(shape: FlowChart.Shape, callback?: () => void): void;
     //animateShape(shape: FlowChart.Shape, callback?: () => void): void;
