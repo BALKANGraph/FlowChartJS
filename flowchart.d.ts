@@ -175,7 +175,7 @@ declare class FlowChart {
     alignShapes(shapes: Array<FlowChart.Shape>, alignPosition: FlowChart.position, alignToTheFirstNode?: boolean): void;
     reposition(position?: FlowChart.startPosition, shapes?: Array<FlowChart.Shape>, shouldAnimate?: boolean, callback?: () => void) : void;
     rippleShape(shape: FlowChart.Shape, color: string, callback?: () => void): void;
-    makeShapeVisible(shape: FlowChart.Shape, callback?: () => void): void;
+    makeShapesVisible(shape: Array<FlowChart.Shape>, callback?: () => void): void;
     destroy() : void;
     //animateShape(shape: FlowChart.Shape, callback?: () => void): void;
     onInit(listener: (this: FlowChart, args: {}) => void): FlowChart;
