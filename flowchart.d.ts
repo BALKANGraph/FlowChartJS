@@ -453,6 +453,7 @@ declare module FlowChart {
     interface ShapeTemplate{
         displayName: string;
         svg(link: FlowChart.Shape) : string;
+        svgFront(link: FlowChart.Shape) : string;
         html(link: FlowChart.Shape) : string;
         ports(link: FlowChart.Shape) : {[key: string]: {x: number, y: number}};
         offset (shape: FlowChart.Shape) : {x: number, y: number};
