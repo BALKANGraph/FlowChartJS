@@ -183,6 +183,12 @@ declare class FlowChart {
         properties?: Array<string>
     }) => void): FlowChart;
     onUndoRedoChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;
+    onSelectedShapeChanging(listener: (this: FlowChart, args: {
+        shape: FlowChart.Shape,
+        mouseEvent: MouseEvent,
+        oldValue: boolean,
+        newValue: boolean
+    }) => void): FlowChart;    
     onSelectedShapesChanged(listener: (this: FlowChart, args: {}) => void): FlowChart;    
     onSelectedPortChange(listener: (this: FlowChart, args: {
         oldPort: FlowChart.Port,
