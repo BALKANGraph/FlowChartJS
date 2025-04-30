@@ -75,6 +75,7 @@ declare module FlowChart {
         fitWidth,
         fit,
         fit1,
+        centerShapes,
         centerTop,
         centerBottom,
         centerLeft,
